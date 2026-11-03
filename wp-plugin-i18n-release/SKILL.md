@@ -59,7 +59,7 @@ Antes de tocar código, **leer el plugin**:
 $svnUser = '<wp-org-user>'       # username WP.org (case-sensitive)
 $svnPass = 'svn_XXXXX...'     # desde "Account & Security" en profiles.wordpress.org
 $slug    = 'mi-plugin'        # el slug del plugin
-$checkout = "C:\Users\leoar\AppData\Local\Temp\opencode\$slug-svn"
+$checkout = "C:\Temp\opencode\$slug-svn"
 
 svn checkout --non-interactive --trust-server-cert `
   --username $svnUser --password $svnPass `
@@ -120,7 +120,7 @@ Para archivos grandes, **delega a un agente** con instrucciones precisas y la ta
 
 ```powershell
 # Desde el directorio del plugin (espejo local)
-$wpCli = 'C:\Users\leoar\AppData\Local\Temp\opencode\wp-cli.phar'
+$wpCli = 'C:\Temp\opencode\wp-cli.phar'
 php $wpCli i18n make-pot . "languages/mi-plugin.pot" --domain="mi-plugin"
 ```
 
@@ -218,7 +218,7 @@ foreach ($pat in $exclude) {
 $env:Path = "$env:ProgramFiles\TortoiseSVN\bin;$env:Path"
 
 # Reemplazar trunk con build limpio
-$trunk = "C:\Users\leoar\AppData\Local\Temp\opencode\$slug-svn\trunk"
+$trunk = "C:\Temp\opencode\$slug-svn\trunk"
 Get-ChildItem -Path $trunk -Force | Where-Object { $_.Name -ne '.svn' } | Remove-Item -Recurse -Force
 Copy-Item -Path "$dist\*" -Destination $trunk -Recurse -Force
 
@@ -300,7 +300,7 @@ svn ls --recursive "https://plugins.svn.wordpress.org/$slug/tags/1.1.0/"
 PHP y muchos binarios fallan si el CWD es un UNC path (`\\server\share`). Antes de correr comandos:
 
 ```powershell
-Set-Location C:\Users\leoar   # o cualquier dir local
+Set-Location C:\Users\<usuario>   # o cualquier dir local
 php $wpCli ...                # ahora funciona
 ```
 
